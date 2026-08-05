@@ -1,0 +1,44 @@
+{
+  "name": "img2webp",
+  "version": "0.1.0",
+  "description": "CLI tool to convert PNG/JPEG images to WebP and update all code references automatically.",
+  "type": "module",
+  "main": "src/cli.js",
+  "bin": {
+    "img2webp": "src/cli.js"
+  },
+  "files": [
+    "src/"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "dev": "node --watch src/cli.js"
+  },
+  "keywords": [
+    "webp",
+    "image",
+    "convert",
+    "cli",
+    "optimize",
+    "png",
+    "jpeg"
+  ],
+  "author": "stebean",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.1.2",
+      "onFail": "error"
+    }
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^14.0.0",
+    "ora": "^8.2.0",
+    "sharp": "^0.34.2"
+  }
+}

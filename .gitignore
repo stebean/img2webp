@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# pnpm
+.pnpm-store/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Environment variables (never commit secrets)
+.env
+.env.local
+
+# Build output (we don't have one yet, but good practice)
+dist/
