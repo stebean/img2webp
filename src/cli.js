@@ -12,6 +12,7 @@ import { program } from 'commander';
 import { createRequire } from 'module';
 import { logger } from './utils/logger.js';
 import { runConvert } from './commands/convert.js';
+import { runReplace } from './commands/replace.js';
 
 // Load package.json to read the version dynamically
 // We use createRequire because we are in ES Module context ("type": "module")
@@ -43,12 +44,7 @@ program
   .option('-e, --ext <extensions>', 'Comma-separated file extensions to scan', 'html,css,js,jsx,ts,tsx,vue,svelte')
   .option('-d, --dry-run', 'Preview what would be replaced without making changes')
   .action(async (directory, options) => {
-    // Will be implemented in a future commit
-    logger.title('Replace Code References');
-    logger.info(`Directory  : ${directory}`);
-    logger.info(`Extensions : ${options.ext}`);
-    logger.info(`Dry run    : ${options.dryRun ?? false}`);
-    logger.warn('Command not implemented yet — coming soon!');
+    await runReplace(directory, options);
   });
 
 // ─── Global error handling ────────────────────────────────────────────────────
