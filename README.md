@@ -2,9 +2,9 @@
 
 > Convert PNG/JPEG images to WebP and automatically update every reference in your source code — in one command.
 
-[![npm version](https://img.shields.io/npm/v/img2webp)](https://www.npmjs.com/package/img2webp)
-[![node](https://img.shields.io/node/v/img2webp)](https://nodejs.org)
-[![license](https://img.shields.io/npm/l/img2webp)](./LICENSE)
+[![npm version](https://img.shields.io/npm/v/@stebean/img2webp)](https://www.npmjs.com/package/@stebean/img2webp)
+[![node](https://img.shields.io/node/v/@stebean/img2webp)](https://nodejs.org)
+[![license](https://img.shields.io/npm/l/@stebean/img2webp)](./LICENSE)
 
 WebP images are **25–80% smaller** than PNG/JPEG with the same visual quality. The problem is that converting images is only half the work — you also have to hunt down every `src`, `url()`, and `import` in your code and update them manually.
 
@@ -35,10 +35,10 @@ WebP images are **25–80% smaller** than PNG/JPEG with the same visual quality.
 
 ```bash
 # Install globally with npm
-npm install -g img2webp
+npm install -g @stebean/img2webp
 
 # Or with pnpm
-pnpm add -g img2webp
+pnpm add -g @stebean/img2webp
 ```
 
 ---
