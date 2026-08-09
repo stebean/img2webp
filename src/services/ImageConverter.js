@@ -7,7 +7,7 @@
  */
 
 import sharp from 'sharp';
-import { rename, unlink } from 'node:fs/promises';
+import { rename, unlink, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 /**
@@ -23,6 +23,9 @@ import path from 'node:path';
  * @property {string}  outputPath  - WebP output file path
  * @property {boolean} success     - Whether the conversion succeeded
  * @property {boolean} skipped     - True when dry-run mode is active
+ * @property {number}  [sizeIn]    - Original file size in bytes
+ * @property {number}  [sizeOut]   - WebP file size in bytes
+ * @property {string}  [backupPath]- Path to the .bak file if backup was enabled
  * @property {string}  [error]     - Error message if success is false
  */
 
@@ -73,9 +76,12 @@ export class ImageConverter {
   async #convertOne(inputPath) {
     const outputPath = this.#buildOutputPath(inputPath);
 
+    // Capture original size for reporting
+    const { size: sizeIn } = await stat(inputPath).catch(() => ({ size: 0 }));
+
     // Dry run: report what would happen without doing it
     if (this.#dryRun) {
-      return { inputPath, outputPath, success: true, skipped: true };
+      return { inputPath, outputPath, success: true, skipped: true, sizeIn };
     }
 
     try {
@@ -84,16 +90,19 @@ export class ImageConverter {
         .webp({ quality: this.#quality })
         .toFile(outputPath);
 
+      // Capture new WebP size for savings calculation
+      const { size: sizeOut } = await stat(outputPath).catch(() => ({ size: 0 }));
+
       // Handle original file: backup or delete
+      let backupPath;
       if (this.#backup) {
-        // Rename original to .bak so the user can restore it if needed
-        await rename(inputPath, `${inputPath}.bak`);
+        backupPath = `${inputPath}.bak`;
+        await rename(inputPath, backupPath);
       } else {
-        // Remove original — the WebP replaces it
         await unlink(inputPath);
       }
 
-      return { inputPath, outputPath, success: true, skipped: false };
+      return { inputPath, outputPath, success: true, skipped: false, sizeIn, sizeOut, backupPath };
     } catch (err) {
       // Catch per-file errors so one bad file doesn't stop the whole batch
       return { inputPath, outputPath, success: false, skipped: false, error: err.message };

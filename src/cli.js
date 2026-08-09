@@ -32,6 +32,7 @@ program
   .option('-q, --quality <number>', 'WebP quality (1-100)', '80')
   .option('-b, --backup', 'Keep the original images after conversion')
   .option('-d, --dry-run', 'Preview what would be converted without making changes')
+  .option('-y, --yes', 'Skip confirmation prompt (useful for scripts and CI/CD)')
   .action(async (directory, options) => {
     await runConvert(directory, options);
   });
