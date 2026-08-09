@@ -1,6 +1,6 @@
 {
   "name": "@stebean/img2webp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "CLI tool to convert PNG/JPEG images to WebP and update all code references automatically.",
   "type": "module",
   "main": "src/cli.js",
@@ -25,6 +25,14 @@
   ],
   "author": "stebean",
   "license": "MIT",
+  "homepage": "https://github.com/stebean/img2webp#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stebean/img2webp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stebean/img2webp/issues"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
