@@ -11,6 +11,7 @@
 import { program } from 'commander';
 import { createRequire } from 'module';
 import { logger } from './utils/logger.js';
+import { runConvert } from './commands/convert.js';
 
 // Load package.json to read the version dynamically
 // We use createRequire because we are in ES Module context ("type": "module")
@@ -31,13 +32,7 @@ program
   .option('-b, --backup', 'Keep the original images after conversion')
   .option('-d, --dry-run', 'Preview what would be converted without making changes')
   .action(async (directory, options) => {
-    // Will be implemented in the next commit
-    logger.title('Convert Images');
-    logger.info(`Directory : ${directory}`);
-    logger.info(`Quality   : ${options.quality}`);
-    logger.info(`Backup    : ${options.backup ?? false}`);
-    logger.info(`Dry run   : ${options.dryRun ?? false}`);
-    logger.warn('Command not implemented yet — coming soon!');
+    await runConvert(directory, options);
   });
 
 // ─── REPLACE command ──────────────────────────────────────────────────────────
